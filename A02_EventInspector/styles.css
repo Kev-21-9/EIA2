@@ -1,0 +1,29 @@
+html{
+    background-color: white;
+}
+
+div[name="div0"]{
+    width: 42%;
+    height: 80%;
+    background-color: black;
+    margin-top: 0;
+    position: absolute;
+    left: 5%;
+}
+
+div[name="div1"]{
+    width: 42%;
+    height: 80%;
+    background-color: red;
+    margin-top: 0;
+    position: absolute;
+    right: 5%;
+}
+
+.spancursor{
+    width: 100px;
+    height: 50px;
+    background-color: lightgreen;
+    position: fixed;
+    /*offset: right-under;*/
+}
