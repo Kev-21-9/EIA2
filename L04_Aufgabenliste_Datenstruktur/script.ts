@@ -17,10 +17,7 @@ function handleLoad():void{
     newTaskBtn.addEventListener("click", addNewTask)
 
     /*let newInfoBtn : HTMLButtonElement = <HTMLButtonElement> document.querySelector(".addInfoBtn");
-    newInfoBtn.addEventListener("click", addNewInfo);
-
-    let checkbox : HTMLInputElement = <HTMLInputElement> document.querySelector(".taskDone");
-    checkbox.addEventListener("click", deleteTask);*/
+    newInfoBtn.addEventListener("click", addNewInfo);*/
 }
 
 function addNewTask(){
@@ -36,23 +33,58 @@ function addNewTask(){
     
 }
 
-/*function date(){
-    let date :Date = new Date();
+function date(){
+    let todayDate :Date = new Date();
 
-    let dateInput : HTMLInputElement = <HTMLInputElement> document.getElementById("oldDate")
-    let oldDate : Date = new Date(dateInput.value);
+    for(let a = 0; a< data.Task.length; a++){
+        let setDate : Date = data.Task[a].date
+        let setDateToDate = new Date(setDate)
+        if (todayDate>setDateToDate){
+            let element : HTMLElement = <HTMLElement> document.getElementById("date"+a);
+            element.style.color = "red";
+        }
 
-    if (date>oldDate){
-        console.log("Your task is overdue!");
     }
-}*/
-
-function addNewInfo():void{
-    console.log("You added additional infos to this task!")
 }
 
-function deleteTask(): void{
+function addNewInfo(_event: Event):void{
+    console.log("You added additional infos to this task!")
+    const target = _event.target as HTMLButtonElement
+    let targetId: string = target.id;
+    let newInfoTargetId: number = +targetId;
+    let newInfoInput :  HTMLInputElement = <HTMLInputElement> document.getElementById("input"+targetId)
+    let inputValue: string = newInfoInput.value;
+    data.Task[newInfoTargetId].info += ", " + inputValue;
+    console.log(data.Task[newInfoTargetId].info);
+    console.log(data.Task);
+    clearAllTasks();
+    console.log(data.Task);
+    showTasks();
+    console.log(data.Task);
+}
+
+function deleteTask(_event: Event): void{
     console.log("You deleted this task!");
+    const target = _event.target as HTMLButtonElement
+    let targetId :string = target.id;
+    let deletTargetId : number = +targetId;
+    data.Task.splice(deletTargetId, 1);
+    console.log(deletTargetId);
+    let formDelete : HTMLFormElement = <HTMLFormElement>document.getElementById("form"+targetId);
+    formDelete.remove()
+    let line: HTMLFormElement = <HTMLFormElement> document.getElementById("line"+deletTargetId);
+    line.remove();
+    console.log(data.Task);
+}
+
+function clearAllTasks(){
+    for (let a = 0; a < data.Task.length; a++){
+        let deleteForm: HTMLFormElement = <HTMLFormElement> document.getElementById("form"+a);
+        deleteForm.remove();
+        let line: HTMLFormElement = <HTMLFormElement> document.getElementById("line"+a);
+        line.remove();
+
+    }
 }
 
 function showTasks(): void{
@@ -61,19 +93,23 @@ function showTasks(): void{
     let divActiveTask: HTMLDivElement = <HTMLDivElement> document.getElementById("activeTask");
     let newForm : HTMLFormElement = document.createElement("form");
     newForm.class = "taskForm";
+    newForm.setAttribute("id", "form"+a)
+    console.log(newForm.id);
     divActiveTask.appendChild(newForm);
 
     let newTaskName : HTMLInputElement = document.createElement("input")
     newTaskName.type = "radio"
-    newTaskName.setAttribute("id", "taskName");
+    newTaskName.setAttribute("id", ""+a);
+    console.log(newTaskName.id);
     newTaskName.setAttribute("class", "a");
     newTaskName.style.width = "5%"
     newTaskName.style.marginTop = "2%";
+    newTaskName.addEventListener("click", deleteTask);
     newForm.appendChild(newTaskName);
 
     let newTaskNameLabel :HTMLLabelElement = document.createElement("label");
     newTaskNameLabel.textContent = data.Task[a].name
-    newTaskNameLabel.setAttribute("for", "taskName")
+    newTaskNameLabel.setAttribute("for", ""+a)
     newTaskNameLabel.style.fontSize = "x-large";
     newForm.appendChild(newTaskNameLabel);
 
@@ -83,6 +119,7 @@ function showTasks(): void{
 
     let newTaskDate : HTMLElement = document.createElement("p");
     let newDate: Date = data.Task[a].date
+    newTaskDate.setAttribute("id", "date"+a);
     newTaskDate.textContent=newDate.toLocaleString()
     newForm.appendChild(newTaskDate)
 
@@ -97,11 +134,15 @@ function showTasks(): void{
     let addInfoInput : HTMLInputElement = document.createElement("input");
     addInfoInput.setAttribute("placeholder", "Add Infos");
     addInfoInput.style.marginRight = "2%";
+    addInfoInput.setAttribute("id", "input"+a);
     newForm.appendChild(addInfoInput);
 
     let addInfoBtn : HTMLButtonElement = document.createElement("button");
     addInfoBtn.textContent = "+";
     addInfoBtn.setAttribute("class", "addInfoBtn");
+    addInfoBtn.setAttribute("type", "button");
+    addInfoBtn.setAttribute("id", ""+a);
+    addInfoBtn.addEventListener("click", addNewInfo);
     newForm.appendChild(addInfoBtn);
 
     let newTaskDoneInput: HTMLInputElement = document.createElement("input");
@@ -117,8 +158,10 @@ function showTasks(): void{
 
     let test : HTMLFormElement = document.createElement("form");
     test.setAttribute("class", "taskForm");
+    test.setAttribute("id", "line"+a);
     divActiveTask.appendChild(test);
     }
+    date();
 }
 
 function showNewTask(): void{
@@ -126,18 +169,20 @@ function showNewTask(): void{
     let divActiveTask: HTMLDivElement = <HTMLDivElement> document.getElementById("activeTask");
     let newForm : HTMLFormElement = document.createElement("form");
     newForm.class = "taskForm";
+    newForm.setAttribute("id", "form"+b);
     divActiveTask.appendChild(newForm);
 
     let newTaskName : HTMLInputElement = document.createElement("input")
     newTaskName.type = "radio"
-    newTaskName.setAttribute("id", "name");
+    newTaskName.setAttribute("id", ""+b);
     newTaskName.style.width = "5%"
     newTaskName.style.marginTop = "2%";
+    newTaskName.addEventListener("click", deleteTask);
     newForm.appendChild(newTaskName);
 
     let newTaskNameLabel :HTMLLabelElement = document.createElement("label");
     newTaskNameLabel.textContent = data.Task[b-1].name
-    newTaskNameLabel.setAttribute("for", "name")
+    newTaskNameLabel.setAttribute("for", ""+b)
     newTaskNameLabel.style.fontSize = "x-large";
     newForm.appendChild(newTaskNameLabel);
 
@@ -147,6 +192,7 @@ function showNewTask(): void{
 
     let newTaskDate : HTMLElement = document.createElement("p");
     let newDate: Date = data.Task[b-1].date
+    newTaskDate.setAttribute("id", "date"+(b-1))
     newTaskDate.textContent=newDate.toLocaleString()
     newForm.appendChild(newTaskDate)
 
@@ -160,12 +206,16 @@ function showNewTask(): void{
 
     let addInfoInput : HTMLInputElement = document.createElement("input");
     addInfoInput.setAttribute("placeholder", "Add Infos");
+    addInfoInput.setAttribute("id", "input"+b);
     addInfoInput.style.marginRight = "2%";
     newForm.appendChild(addInfoInput);
 
     let addInfoBtn : HTMLButtonElement = document.createElement("button");
     addInfoBtn.textContent = "+";
     addInfoBtn.setAttribute("class", "addInfoBtn");
+    addInfoBtn.setAttribute("type", "button");
+    addInfoBtn.setAttribute("id", ""+b);
+    addInfoBtn.addEventListener("click", addNewInfo);
     newForm.appendChild(addInfoBtn);
 
     let newTaskDoneInput: HTMLInputElement = document.createElement("input");
@@ -181,6 +231,9 @@ function showNewTask(): void{
 
     let test : HTMLFormElement = document.createElement("form");
     test.setAttribute("class", "taskForm");
+    test.setAttribute("id", "line"+b);
     divActiveTask.appendChild(test);
+
+    date();
 }
 
