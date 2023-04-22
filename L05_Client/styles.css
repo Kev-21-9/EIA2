@@ -1,0 +1,117 @@
+header{
+    text-align: center;
+    margin-top: 2%;
+    font-size: x-large;
+    margin-bottom: 3%;
+}
+
+#activeTask{
+    width: 45%;
+    height:fit-content;
+    background-color: whitesmoke;
+    position: absolute;
+    margin-left: 2%;
+    border: 2px solid gray;
+    
+}
+
+#newTask{
+    width: 45%;
+    height: 80%;
+    background-color: whitesmoke;
+    position: absolute;
+    margin-left: 52%;
+    border: 2px solid gray;
+}
+
+h2{
+    text-align: center;
+}
+
+input{
+    width: 50%;
+    height: 20px;
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+input::placeholder{
+    color: gray;
+    font-size: larger;
+
+}
+
+select{
+    width: 50%;
+    height: 20px;
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+#addBtn{
+    width: 10%;
+    height: 5%;
+    background-color: white;
+    border: 1px solid gray;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#addBtn:active{
+    background-color: darkgrey;
+}
+
+#cleanToilet{
+    width: 2%;
+}
+
+h4{
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+
+#labelCleanToilet{
+    font-size: large;
+}
+
+p{
+    margin-left: 5%;
+}
+
+.progressInput{
+    width: 2%; 
+}
+
+.addInfoBtn{
+    height: 27px;
+    width: 10%;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.addInfoBtn:active{
+    background-color: darkgrey;
+}
+
+select{
+    font-size: large;
+}
+
+#buyCandy{
+    width: 2%;
+}
+
+#labelBuyCandy{
+    font-size: large;
+    color: red;
+}
+
+.taskForm{
+    border-bottom: 1px solid gray;
+    border-bottom-style:dashed;
+}
+
+.inputoutdated{
+    background-color: red;
+}
+

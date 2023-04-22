@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h2>Task Companion</h2>
+    </header>
+    <main>
+        <div id="activeTask">
+            <h2>Active task</h2>
+            
+        </div>
+        <div id="newTask">
+            <h2>Add new task</h2>
+            <form id="newTaskForm">
+                <input type="text" id="name" placeholder="Name your task">
+                <br>
+                <select name="newTaskPerson" id="newTaskPerson">
+                    <option value="Lydia">Lydia</option>
+                    <option value="Kevin">Kevin</option>
+                    <option value="Oliver">Oliver</option>
+                </select>
+                <br>
+                <input type="date" id="date">
+                <br>
+                <input type="text" id="newInfos" placeholder="Add Infos">
+                <button id="addBtn" type="reset">Add new task</button>
+            </form>
+            
+        </div>
+    </main>
+</body>
+</html>
