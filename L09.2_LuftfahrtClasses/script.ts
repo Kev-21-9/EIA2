@@ -1,9 +1,9 @@
 namespace LuftfahrtClasses {
     /*
-    Aufgabe: A09.2 Luftfahrt
+    Aufgabe: A09.2 Luftfahrt Classes
     Name: Kevin Erne
     Matrikel: 274303
-    Datum: 25.05.2023
+    Datum: 27.05.2023
     Quellen: Keine
     */
 
